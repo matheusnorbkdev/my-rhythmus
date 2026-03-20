@@ -1,14 +1,22 @@
 import { Input } from "@/Components/Input"
 import { Button } from "@/Components/button"
-import {Image, Alert, ScrollView, StyleSheet, Text, View } from "react-native"
+import Feather from '@expo/vector-icons/Feather'
 import { Link } from "expo-router"
+import { useState } from "react"
+import {useRouter} from "expo-router"
+import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default function Index(){
-	function handleSignIn(){
-	Alert.alert("Login", "Função do login ainda está sendo processada")
-	}
+	const [viewPassNormie, setViewPassNormie] = useState(true)
+	const router = useRouter()
     return (
-	<ScrollView>
-		    <View style = {styles.container} >
+		<KeyboardAwareScrollView
+  style={styles.container}
+  enableOnAndroid={true}
+  extraScrollHeight={20}
+  keyboardShouldPersistTaps="handled"
+>
+		 <View>
 			<Image source={require("@/assets/init.png")}
 			style = {styles.illustration}
 			/>
@@ -16,15 +24,32 @@ export default function Index(){
 			<Text style = {styles.subtitle}>Clique aqui para conseguir entrar em sua conta</Text>
 		<View style = {styles.form}>
 			<Input placeholder="E-mail" keyboardType="email-address" onChangeText = {(text) => console.log(text)} />
-			<Input placeholder="Senha" secureTextEntry/>
-			<Button label ="Entrar" onPress={handleSignIn}/>
+			{/* */}
+			<View style={styles.containerInPass}>
+                        <Input
+                            placeholder="Confirme sua senha"
+                            secureTextEntry={viewPassNormie}
+                            style={styles.inPass}
+                        />
+
+                        <Pressable style={styles.btnEyePass} onPress={() => setViewPassNormie(!viewPassNormie)}>
+                            <Feather
+                                name={viewPassNormie ? "eye" : "eye-off"}
+                                size={24}
+                                color="black"
+                            />
+                        </Pressable>
+                    </View>
+			
+			<Button label ="Entrar" onPress={() =>router.push("/tabs/home")}/>
 		</View>
 		<Text style= {styles.footerText}>
 			Nao tem uma conta?
-			<Link href ="/signup"> Cadastre-se aqui! </Link> 
+			<Link style = {styles.link} href="/signup"> Cadastre-se aqui! </Link> 
 		</Text>
+		{/* aqui tem um link para a home, parte de desenvolvedor, obviamente vamo tira depois, aqui nao tek mais, se nao erra saporra */}
 	</View>
-	</ScrollView>
+	</KeyboardAwareScrollView>
 
     )
 }
@@ -35,16 +60,18 @@ const styles = StyleSheet.create({
 		height: 200,
 		resizeMode : "contain",
 		marginTop : 32,
+		marginBottom : 22,
 	},
 	container: {
 	flex: 1,
-	backgroundColor :"#FDFDFD",
+	backgroundColor : "#fff",
 	padding : 32,
 	},
 	title: {
 	fontSize: 32,
 	fontWeight: "900",
 	textAlign : "center",
+	marginBottom : 8,	
 	},
 	subtitle: {
 		fontSize: 16,
@@ -63,6 +90,23 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		marginTop: 24,
 		color: "#585860",
-	}
+	},
+	link: {
+		color: "#2772c9",
+		textDecorationLine: "underline",
+	},
+	containerInPass: {
+        flexDirection:"row",
+        alignItems:"center",
+    },
+
+    btnEyePass:{
+        position:"absolute",
+        right:12,
+    },
+
+    inPass:{
+        flex:1,
+    },
 })
 

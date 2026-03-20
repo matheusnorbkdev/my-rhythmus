@@ -1,19 +1,22 @@
-import { StyleSheet, TextInput, TextInputProps} from "react-native"
-export function Input({...rest}: TextInputProps){
+import { StyleSheet, TextInput, TextInputProps } from "react-native"
+
+export function Input({ style, ...rest }: TextInputProps){
     return (
-        <TextInput style = {style.Input} {...rest}/>
+        <TextInput style={[styles.input, style]} {...rest}/>
     )
 }
-const style = StyleSheet.create({
-    Input: {
+
+const styles = StyleSheet.create({
+    input: {
         width: "100%",
         height: 46,
-        borderWidth: 1,
-        borderRadius: 6,
-        borderColor: "#000080",
+        borderWidth: 5,
+        borderRadius: 28,
+        borderColor: "#0c0c0c",
         fontSize: 16,
-        paddingLeft: 12,
-        
+        paddingLeft: 18,
+        paddingRight: 18,
+        paddingBottom: 9,
+        marginBottom: 8,
     }
-
 })
