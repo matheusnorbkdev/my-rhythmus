@@ -37,7 +37,7 @@ export default function Index(){
 							onChangeText={setSenha}
                         />
 						{/* botão para mostrar/esconder senha */}
-                        <Pressable style={styles.btnEyePass} onPress={() => setViewPassNormie(!viewPassNormie)}>
+                        <Pressable style={styles.btnEyePass} onPress={() => setViewPassNormie(!viewPassNormie)}> {/* quando aperta serve para inverter o sinal de viewPassNormie*/}
                             <Feather
                                 name={viewPassNormie ? "eye" : "eye-off"}
                                 size={24}
