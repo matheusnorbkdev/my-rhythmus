@@ -38,9 +38,10 @@ export default function Info() {
           <Text style={styles.label}>Data de nascimento:</Text>
           <Input
             placeholder="xx/xx/xxxx"
-            keyboardType="numeric"
-            style={styles.inputGray} // Estilo cinza arredondado
-          />
+  placeholderTextColor="#000000" // <--- É assim que muda a cor do "xx/xx/xxxx"
+  keyboardType="numeric"
+  style={styles.inputGray} 
+/>
 
           {/* Campo: Sexo (Simulado) */}
           <Text style={styles.label}>Qual seu sexo?</Text>
@@ -54,6 +55,7 @@ export default function Info() {
           <Text style={styles.label}>Qual sua altura?</Text>
           <Input
             placeholder="Altura (em cm)"
+            placeholderTextColor="#000000" 
             keyboardType="numeric"
             style={styles.inputGray}
           />
@@ -62,8 +64,10 @@ export default function Info() {
           <Text style={styles.label}>Qual seu peso?</Text>
           <Input
             placeholder="Peso (em kg)"
+            placeholderTextColor="#000000" 
             keyboardType="numeric"
             style={styles.inputGray}
+          
           />
 
           {/* --- BOTÃO DE PRÓXIMO --- */}
@@ -117,7 +121,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: "#161a18",
+    color: "#000000",
     marginBottom: -8, // Aproxima o texto do input abaixo dele
     marginLeft: 5,
   },
