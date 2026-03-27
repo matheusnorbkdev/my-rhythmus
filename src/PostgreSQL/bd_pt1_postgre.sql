@@ -3,7 +3,7 @@ id_user serial primary key,
 nome_user varchar(150) not null,
 apelido_user varchar(50) not null,
 email_user varchar(150) unique not null,
-senha_user varchar(255) not null,
+senha_user varchar(255) not null unique,
 nascimento_user date not null,
 phone_user varchar(20) not null
 );
