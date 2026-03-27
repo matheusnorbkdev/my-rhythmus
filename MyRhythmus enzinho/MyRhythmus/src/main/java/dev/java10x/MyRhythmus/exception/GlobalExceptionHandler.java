@@ -1,0 +1,73 @@
+package dev.java10x.MyRhythmus.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Manipulador global de exceções.
+ * Centraliza o tratamento de erros e retorna respostas padronizadas.
+ */
+@RestControllerAdvice  // Combina @ControllerAdvice com @ResponseBody
+public class GlobalExceptionHandler {
+    
+    /**
+     * Trata exceções de negócio (BusinessException).
+     * Retorna HTTP 400 Bad Request com detalhes do erro.
+     */
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Map<String, Object>> handleBusinessException(BusinessException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("error", "Erro de Negócio");
+        response.put("message", ex.getMessage());
+        return ResponseEntity.badRequest().body(response);
+    }
+    
+    /**
+     * Trata erros de validação dos DTOs (Bean Validation).
+     * Retorna HTTP 400 Bad Request com todos os campos inválidos.
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, Object> response = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
+        
+        // Coleta todos os erros de validação
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("error", "Erro de Validação");
+        response.put("errors", errors);
+        
+        return ResponseEntity.badRequest().body(response);
+    }
+    
+    /**
+     * Trata exceções genéricas não capturadas pelos handlers específicos.
+     * Retorna HTTP 500 Internal Server Error.
+     * ⚠️ Em produção, evitar expor detalhes internos (ex.getMessage()).
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.put("error", "Erro Interno do Servidor");
+        response.put("message", ex.getMessage());  // Logar em produção, não retornar
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+}
