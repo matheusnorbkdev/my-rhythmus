@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 // Importamos os componentes básicos do celular
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View, Alert } from "react-native";
 // O ScrollView inteligente que sobe a tela quando o teclado abre
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 // Ícones (usaremos a setinha 'chevron')
@@ -11,6 +11,24 @@ import { useRouter } from "expo-router";
 
 export default function Info() {
   const router = useRouter();
+  // Criando as "caixinhas" de memória para cada campo
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [altura, setAltura] = useState("");
+  const [peso, setPeso] = useState("");
+  const [sexo, setSexo] = useState("Sexo"); 
+
+  // Função para abrir o menu de seleção de sexo
+  const selecionarSexo = () => {
+    Alert.alert(
+      "Selecione o Sexo",
+      "Escolha uma opção:",
+      [
+        { text: "Masculino", onPress: () => setSexo("Masculino") },
+        { text: "Feminino", onPress: () => setSexo("Feminino") },
+        { text: "Cancelar", style: "cancel" }
+      ]
+    );
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -24,7 +42,7 @@ export default function Info() {
       {/* --- CABEÇALHO (PARTE ROXA) --- */}
       <View style={styles.header}>
         <Image
-          source={require("@/assets/init.png")}
+          source={require("@/assets/logo.png")}
           style={styles.illustration}
         />
         <Text style={styles.headerTitle}>Insira suas informações</Text>
@@ -38,36 +56,53 @@ export default function Info() {
           <Text style={styles.label}>Data de nascimento:</Text>
           <Input
             placeholder="xx/xx/xxxx"
-  placeholderTextColor="#000000" // <--- É assim que muda a cor do "xx/xx/xxxx"
-  keyboardType="numeric"
-  style={styles.inputGray} 
-/>
+            placeholderTextColor="#606060" // <--- É assim que muda a cor do "xx/xx/xxxx"
+            keyboardType="numbers-and-punctuation"
+            style={styles.inputGray} 
+            value={dataNascimento} // O que a caixa mostra
+            onChangeText={(valor) => {
+            setDataNascimento(valor); // Salva na memória
+            console.log("Data de nascimento atualizada para:", valor); // TESTE NO TERMINAL
+            }}
+          />
 
-          {/* Campo: Sexo (Simulado) */}
+          {/* Campo: Sexo */}
           <Text style={styles.label}>Qual seu sexo?</Text>
-          <View style={styles.pickerFake}>
-            <Text style={styles.pickerText}>Sexo</Text>
-            {/* Ícone de seta para baixo igual ao da sua foto */}
-            <Feather name="chevron-down" size={28} color="#606060" />
-          </View>
+          <Pressable 
+            style={styles.pickerFake} 
+            onPress={selecionarSexo} // Chama a função ao clicar
+          >
+            {/* Agora o texto mostra o que está salvo na variável 'sexo' */}
+            <Text style={styles.pickerText}>{sexo}</Text>
+            <Feather name="chevron-down" size={28} color="#000000"/>
+          </Pressable>
 
           {/* Campo: Altura */}
           <Text style={styles.label}>Qual sua altura?</Text>
           <Input
             placeholder="Altura (em cm)"
-            placeholderTextColor="#000000" 
+            placeholderTextColor="#606060" 
             keyboardType="numeric"
             style={styles.inputGray}
+            value={altura} // O que a caixa mostra
+            onChangeText={(texto) => {
+            setAltura(texto); // Salva na memória
+            console.log("Altura atualizada para:", texto); // TESTE NO TERMINAL
+            }}
           />
 
           {/* Campo: Peso */}
           <Text style={styles.label}>Qual seu peso?</Text>
           <Input
             placeholder="Peso (em kg)"
-            placeholderTextColor="#000000" 
+            placeholderTextColor="#606060"
             keyboardType="numeric"
             style={styles.inputGray}
-          
+            value={peso} // O que a caixa mostra
+            onChangeText={(texto) => {
+            setPeso(texto); // Salva na memória
+            console.log("Peso atualizado para:", texto); // TESTE NO TERMINAL
+            }}
           />
 
           {/* --- BOTÃO DE PRÓXIMO --- */}
@@ -91,15 +126,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#2E008B",
   },
   // 2. Área do topo onde fica o logo e a frase branca
-  header: {
+ header: {
     alignItems: "center",
-    paddingTop: 50,
-    paddingBottom: 30,
+    height: 270, // Fixe uma altura para o topo roxo
+    justifyContent: "center", // Centraliza o conteúdo dentro desses 250px
   },
   illustration: {
-    width: "70%",
-    height: 120,
+    width: '90%', // ou "90%"
+    height: 200, 
     resizeMode: "contain",
+    // Se quiser que ela suba um pouco sem mexer no resto:
+    marginTop: -20, 
   },
   headerTitle: {
     fontSize: 28,
@@ -146,6 +183,7 @@ const styles = StyleSheet.create({
   pickerText: {
     fontSize: 16,
     color: "#333",
+    paddingLeft: 4,
   },
   // 6. Alinha a seta de navegação no canto inferior direito
   nextButton: {
@@ -153,4 +191,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingBottom: 30,
   },
+  
 });
