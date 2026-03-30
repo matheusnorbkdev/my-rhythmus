@@ -69,13 +69,35 @@ export default function Info() {
           {/* Campo: Sexo */}
           <Text style={styles.label}>Qual seu sexo?</Text>
           <Pressable 
-            style={styles.pickerFake} 
-            onPress={selecionarSexo} // Chama a função ao clicar
-          >
-            {/* Agora o texto mostra o que está salvo na variável 'sexo' */}
-            <Text style={styles.pickerText}>{sexo}</Text>
-            <Feather name="chevron-down" size={28} color="#000000"/>
-          </Pressable>
+  style={styles.pickerFake} 
+  onPress={() => {
+    Alert.alert(
+      "Selecione o Sexo",
+      "Escolha uma opção:",
+      [
+        { 
+          text: "Masculino", 
+          onPress: () => {
+            setSexo("Masculino"); // Salva na memória (muda o texto na tela)
+            console.log("Sexo atualizado para: Masculino"); // Mostra no terminal
+          } 
+        },
+        { 
+          text: "Feminino", 
+          onPress: () => {
+            setSexo("Feminino"); // Salva na memória (muda o texto na tela)
+            console.log("Sexo atualizado para: Feminino"); // Mostra no terminal
+          } 
+        },
+        { text: "Cancelar", style: "cancel" }
+      ]
+    );
+  }}
+>
+  {/* IMPORTANTE: Usar a variável {sexo} aqui para o texto mudar de "Sexo" para a escolha */}
+  <Text style={styles.pickerText}>{sexo}</Text>
+  <Feather name="chevron-down" size={28} color="#000000" />
+</Pressable>
 
           {/* Campo: Altura */}
           <Text style={styles.label}>Qual sua altura?</Text>
