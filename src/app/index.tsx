@@ -8,6 +8,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function Index() {
+    
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   // viewPassNormie: controla se a senha aparece (true) ou fica com bolinhas (false)
@@ -140,6 +141,7 @@ const styles = StyleSheet.create({
     color: "#000",
     marginBottom: -8, // Aproxima o texto do input abaixo
     marginLeft: 5,
+
   },
   // Estilo cinza arredondado que criamos para todos os inputs
   inputGray: {
@@ -148,14 +150,17 @@ const styles = StyleSheet.create({
     height: 45,
     paddingHorizontal: 15,
     borderWidth: 0,
+    paddingBottom: 2,
   },
   containerInPass: {
     flexDirection: "row", // Coloca o Input e o Olho na mesma linha
     alignItems: "center",
+   
   },
   btnEyePass: {
     position: "absolute", // Fixa o olho por cima do input
     right: 15, // Alinhado à direita
+    paddingBottom: 7,
   },
   footerText: {
     fontSize: 14,
