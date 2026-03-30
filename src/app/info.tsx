@@ -15,19 +15,15 @@ export default function Info() {
   const [dataNascimento, setDataNascimento] = useState("");
   const [altura, setAltura] = useState("");
   const [peso, setPeso] = useState("");
-  const [sexo, setSexo] = useState("Sexo"); 
+  const [sexo, setSexo] = useState("Sexo");
 
   // Função para abrir o menu de seleção de sexo
   const selecionarSexo = () => {
-    Alert.alert(
-      "Selecione o Sexo",
-      "Escolha uma opção:",
-      [
-        { text: "Masculino", onPress: () => setSexo("Masculino") },
-        { text: "Feminino", onPress: () => setSexo("Feminino") },
-        { text: "Cancelar", style: "cancel" }
-      ]
-    );
+    Alert.alert("Selecione o Sexo", "Escolha uma opção:", [
+      { text: "Masculino", onPress: () => setSexo("Masculino") },
+      { text: "Feminino", onPress: () => setSexo("Feminino") },
+      { text: "Cancelar", style: "cancel" },
+    ]);
   };
 
   return (
@@ -58,58 +54,54 @@ export default function Info() {
             placeholder="xx/xx/xxxx"
             placeholderTextColor="#606060" // <--- É assim que muda a cor do "xx/xx/xxxx"
             keyboardType="numbers-and-punctuation"
-            style={styles.inputGray} 
+            style={styles.inputGray}
             value={dataNascimento} // O que a caixa mostra
             onChangeText={(valor) => {
-            setDataNascimento(valor); // Salva na memória
-            console.log("Data de nascimento atualizada para:", valor); // TESTE NO TERMINAL
+              setDataNascimento(valor); // Salva na memória
+              console.log("Data de nascimento atualizada para:", valor); // TESTE NO TERMINAL
             }}
           />
 
           {/* Campo: Sexo */}
           <Text style={styles.label}>Qual seu sexo?</Text>
-          <Pressable 
-  style={styles.pickerFake} 
-  onPress={() => {
-    Alert.alert(
-      "Selecione o Sexo",
-      "Escolha uma opção:",
-      [
-        { 
-          text: "Masculino", 
-          onPress: () => {
-            setSexo("Masculino"); // Salva na memória (muda o texto na tela)
-            console.log("Sexo atualizado para: Masculino"); // Mostra no terminal
-          } 
-        },
-        { 
-          text: "Feminino", 
-          onPress: () => {
-            setSexo("Feminino"); // Salva na memória (muda o texto na tela)
-            console.log("Sexo atualizado para: Feminino"); // Mostra no terminal
-          } 
-        },
-        { text: "Cancelar", style: "cancel" }
-      ]
-    );
-  }}
->
-  {/* IMPORTANTE: Usar a variável {sexo} aqui para o texto mudar de "Sexo" para a escolha */}
-  <Text style={styles.pickerText}>{sexo}</Text>
-  <Feather name="chevron-down" size={28} color="#000000" />
-</Pressable>
+          <Pressable
+            style={styles.pickerFake}
+            onPress={() => {
+              Alert.alert("Selecione o Sexo", "Escolha uma opção:", [
+                {
+                  text: "Masculino",
+                  onPress: () => {
+                    setSexo("Masculino"); // Salva na memória (muda o texto na tela)
+                    console.log("Sexo atualizado para: Masculino"); // Mostra no terminal
+                  },
+                },
+                {
+                  text: "Feminino",
+                  onPress: () => {
+                    setSexo("Feminino"); // Salva na memória (muda o texto na tela)
+                    console.log("Sexo atualizado para: Feminino"); // Mostra no terminal
+                  },
+                },
+                { text: "Cancelar", style: "cancel" },
+              ]);
+            }}
+          >
+            {/* IMPORTANTE: Usar a variável {sexo} aqui para o texto mudar de "Sexo" para a escolha */}
+            <Text style={styles.pickerText}>{sexo}</Text>
+            <Feather name="chevron-down" size={28} color="#000000" />
+          </Pressable>
 
           {/* Campo: Altura */}
           <Text style={styles.label}>Qual sua altura?</Text>
           <Input
             placeholder="Altura (em cm)"
-            placeholderTextColor="#606060" 
+            placeholderTextColor="#606060"
             keyboardType="numeric"
             style={styles.inputGray}
             value={altura} // O que a caixa mostra
             onChangeText={(texto) => {
-            setAltura(texto); // Salva na memória
-            console.log("Altura atualizada para:", texto); // TESTE NO TERMINAL
+              setAltura(texto); // Salva na memória
+              console.log("Altura atualizada para:", texto); // TESTE NO TERMINAL
             }}
           />
 
@@ -122,8 +114,8 @@ export default function Info() {
             style={styles.inputGray}
             value={peso} // O que a caixa mostra
             onChangeText={(texto) => {
-            setPeso(texto); // Salva na memória
-            console.log("Peso atualizado para:", texto); // TESTE NO TERMINAL
+              setPeso(texto); // Salva na memória
+              console.log("Peso atualizado para:", texto); // TESTE NO TERMINAL
             }}
           />
 
@@ -140,7 +132,8 @@ export default function Info() {
     </KeyboardAwareScrollView>
   );
 }
-
+{
+}
 const styles = StyleSheet.create({
   // 1. O fundo de toda a página
   mainContainer: {
@@ -148,17 +141,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#2E008B",
   },
   // 2. Área do topo onde fica o logo e a frase branca
- header: {
+  header: {
     alignItems: "center",
     height: 270, // Fixe uma altura para o topo roxo
     justifyContent: "center", // Centraliza o conteúdo dentro desses 250px
   },
   illustration: {
-    width: '90%', // ou "90%"
-    height: 200, 
+    width: "90%", // ou "90%"
+    height: 200,
     resizeMode: "contain",
     // Se quiser que ela suba um pouco sem mexer no resto:
-    marginTop: -20, 
+    marginTop: -20,
   },
   headerTitle: {
     fontSize: 28,
@@ -213,5 +206,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingBottom: 30,
   },
-  
 });

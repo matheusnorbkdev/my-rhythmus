@@ -2,13 +2,19 @@ import { Button } from "@/Components/button";
 import { Input } from "@/Components/Input";
 import Feather from "@expo/vector-icons/Feather";
 import { Link, useRouter } from "expo-router";
-import { useState } from "react";
+import React, { useState } from "react"; // Adicionado React para padronização
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const router = useRouter();
 export default function Signup() {
+  const router = useRouter(); // Agora dentro da função, como deve ser
   const [viewPass, setViewPass] = useState(true);
+
+  // Estados para capturar os dados (como fizemos na tela Info)
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
 
   function onViewPass() {
     setViewPass(!viewPass);
@@ -16,138 +22,176 @@ export default function Signup() {
 
   return (
     <KeyboardAwareScrollView
-      style={styles.container}
-      enableOnAndroid={true}
-      extraScrollHeight={20}
-      keyboardShouldPersistTaps="handled"
+      style={styles.mainContainer} // Fundo roxo principal
+      contentContainerStyle={{ flexGrow: 1 }}
+      bounces={false}
     >
-      <View style={styles.container}>
+      {/* --- TOPO ROXO COM LOGO --- */}
+      <View style={styles.header}>
         <Image
-          source={require("@/assets/init.png")}
+          source={require("@/assets/logo.png")}
           style={styles.illustration}
         />
+        <Text style={styles.headerTitle}>Crie sua conta</Text>
+      </View>
 
+      {/* --- CARD BRANCO (CONTEÚDO) --- */}
+      <View style={styles.contentCard}>
         <Text style={styles.title}>Cadastro</Text>
         <Text style={styles.subtitle}>
-          Preencha os campos para realizar seu cadastro
+          Preencha os campos para começar sua jornada
         </Text>
 
         <View style={styles.form}>
-          <Input placeholder="Nome" />
-          <Input placeholder="Sobrenome" />
-
+          {/* Campo Nome */}
+          <Text style={styles.label}>Nome completo:</Text>
           <Input
-            placeholder="E-mail"
-            keyboardType="email-address"
-            onChangeText={(text) => console.log(text)}
+            placeholder="Ex: João Silva"
+            placeholderTextColor="#606060"
+            style={styles.inputGray}
+            value={nome}
+            onChangeText={setNome}
           />
 
-          {/* SENHA */}
+          {/* Campo E-mail */}
+          <Text style={styles.label}>E-mail:</Text>
+          <Input
+            placeholder="seu@email.com"
+            placeholderTextColor="#606060"
+            keyboardType="email-address"
+            style={styles.inputGray}
+            value={email}
+            onChangeText={setEmail}
+          />
+
+          {/* Campo Senha */}
+          <Text style={styles.label}>Senha:</Text>
           <View style={styles.containerInPass}>
             <Input
-              placeholder="Senha"
+              placeholder="Crie uma senha"
+              placeholderTextColor="#606060"
               secureTextEntry={viewPass}
-              style={styles.inPass}
+              style={[styles.inputGray, { flex: 1 }]}
+              value={senha}
+              onChangeText={setSenha}
             />
-
             <Pressable style={styles.btnEyePass} onPress={onViewPass}>
               <Feather
                 name={viewPass ? "eye" : "eye-off"}
-                size={24}
-                color="black"
+                size={22}
+                color="#404040"
               />
             </Pressable>
           </View>
 
-          {/* CONFIRMAR SENHA */}
+          {/* Campo Confirmar Senha */}
+          <Text style={styles.label}>Confirmar Senha:</Text>
           <View style={styles.containerInPass}>
             <Input
-              placeholder="Confirme sua senha"
+              placeholder="Repita a senha"
+              placeholderTextColor="#606060"
               secureTextEntry={viewPass}
-              style={styles.inPass}
+              style={[styles.inputGray, { flex: 1 }]}
+              value={confirmarSenha}
+              onChangeText={setConfirmarSenha}
             />
-
-            <Pressable style={styles.btnEyePass} onPress={onViewPass}>
-              <Feather
-                name={viewPass ? "eye" : "eye-off"}
-                size={24}
-                color="black"
-              />
-            </Pressable>
           </View>
 
-          <Button label="Criar Conta" onPress={() => router.push("/info")} />
+          {/* Botão de Ação */}
+          <View style={{ marginTop: 10 }}>
+            <Button label="Próximo" onPress={() => router.push("/info")} />
+          </View>
+
+          {/* Link para voltar ao Login */}
+          <Text style={styles.footerText}>
+            Já tem uma conta?{" "}
+            <Link style={styles.link} href="/">
+              Entre aqui!
+            </Link>
+          </Text>
         </View>
-
-        <Text style={styles.footerText}>
-          Já tem uma conta?
-          <Link style={styles.link} href={"/"}>
-            {" "}
-            Entre aqui!{" "}
-          </Link>
-        </Text>
       </View>
     </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  //ilustration é a imagem do cadastro, tem um flex 1 pra ela ocupar todo o espaço disponivel,
-  // width 100% pra ela ocupar toda a largura da tela, height 200 pra deixar ela com uma altura fixa,
-  // resizeMode contain pra ela manter a proporção da imagem, marginTop 32 pra deixar um espacinho entre o topo da tela e a imagem
-  illustration: {
+  // Container principal com a cor roxa do tema
+  mainContainer: {
     flex: 1,
-    width: "100%",
-    height: 200,
-    resizeMode: "contain",
-    marginTop: 32,
+    backgroundColor: "#2E008B",
   },
-  //container serve para deixar o fundo branco, e colocar um padding de 32 em toda a tela
-  container: {
+  // Cabeçalho centralizado para a logo
+  header: {
+    alignItems: "center",
+    height: 220,
+    justifyContent: "center",
+  },
+  illustration: {
+    width: "70%",
+    height: 140,
+    resizeMode: "contain",
+  },
+  headerTitle: {
+    fontSize: 22,
+    color: "#FFF",
+    fontWeight: "600",
+    marginTop: 5,
+  },
+  // Card branco com a curva de 80px no canto superior direito
+  contentCard: {
     flex: 1,
     backgroundColor: "#FDFDFD",
-    padding: 16,
+    borderTopRightRadius: 80,
+    paddingHorizontal: 35,
+    paddingTop: 30,
   },
-  //titulo
   title: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: "900",
-    textAlign: "center",
+    color: "#000",
   },
-  //subtitulo
   subtitle: {
-    fontSize: 16,
-  },
-  //form serve para deixar os inputs do cadastro com um gap de 10, gap é a distancia entre os elementos, e marginTop 14 é pra deixar um espacinho entre o subtitulo e os inputs
-  form: {
-    marginTop: 14,
-    gap: 10,
-  },
-  //texto do rodapé, tem um link pra ir pra tela de login, o link é do expo-router, e tem um estilo pra deixar ele azul e sublinhado
-  footerText: {
     fontSize: 14,
-    textAlign: "center",
-    marginTop: 24,
-    color: "#585860",
+    color: "#666",
+    marginBottom: 15,
   },
-  //serve para deixar o input de senha e o botão de mostrar senha alinhados, o flexDirection row é pra deixar eles na horizontal, e o alignItems center é pra deixar eles alinhados verticalmente
+  form: {
+    gap: 12,
+  },
+  // Labels idênticos aos da tela de Info
+  label: {
+    fontSize: 16,
+    color: "#000",
+    marginBottom: -8,
+    marginLeft: 5,
+  },
+  // Input cinza arredondado
+  inputGray: {
+    backgroundColor: "#BDBDBD",
+    borderRadius: 20,
+    height: 45,
+    paddingHorizontal: 15,
+    borderWidth: 0,
+  },
   containerInPass: {
     flexDirection: "row",
     alignItems: "center",
   },
-  //deixa o botao do olho de senha 12 pra direita, 8 pra baixo, e deixa ele em cima do input de senha com o position absolute
   btnEyePass: {
     position: "absolute",
-    right: 12,
-    marginBottom: 8,
+    right: 15,
   },
-  // é pra fazer o input de senha ficar bonitinho, sem isso o input de senha fica gigante
-  inPass: {
-    flex: 1,
+  footerText: {
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 15,
+    color: "#585860",
+    paddingBottom: 30,
   },
-  //link
   link: {
-    color: "#2772c9",
+    color: "#2E008B",
+    fontWeight: "bold",
     textDecorationLine: "underline",
   },
 });
