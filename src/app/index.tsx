@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 250, // Define o tamanho da área roxa visível
     justifyContent: "center",
+    
   },
   illustration: {
     width: "80%",

@@ -98,28 +98,36 @@ export default function Signup() {
             />
           </View>
 
-         {/* Botão de Ação */}
+       {/* campo do botão */}
       <View style={{ marginTop: 10 }}>
         <Button 
           label="Próximo" 
           onPress={() => {
-            // 1. Verificamos se a senha e a confirmação são iguais
+          // VALIDAÇÃO 1: Campos Vazios
+            if (!nome || !email || !senha) {
+              alert("Por favor, preencha todos os campos!");
+              return;
+            }
+
+            // VALIDAÇÃO 2: E-mail (verificação simples de @)
+            if (!email.includes("@")) {
+              alert("Por favor, insira um e-mail válido!");
+              return;
+            }
+
+            // VALIDAÇÃO 3: Senhas iguais
             if (senha !== confirmarSenha) {
               alert("As senhas não coincidem!");
-              return; // Para o código aqui e não muda de tela
-          }
+              return;
+            }
 
-            // 2. Enviamos os dados para a tela /info
+            // Se passou por tudo, ele "viaja" para a próxima tela
             router.push({
               pathname: "/info",
-              params: { 
-              nome: nome,
-              email: email,
-              senha: senha 
-            }
+              params: { nome, email, senha }
             });
       
-            console.log("Dados enviados do cadastro:", nome);
+            console.log("Cadastro validado com sucesso para:", nome);
           }} 
         />
       </View>
