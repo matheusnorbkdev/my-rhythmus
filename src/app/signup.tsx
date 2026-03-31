@@ -44,9 +44,9 @@ export default function Signup() {
 
         <View style={styles.form}>
           {/* Campo Nome */}
-          <Text style={styles.label}>Nome completo:</Text>
+          <Text style={styles.label}>Primeiro nome:</Text>
           <Input
-            placeholder="Ex: João Silva"
+            placeholder="Ex: João "
             placeholderTextColor="#606060"
             style={styles.inputGray}
             value={nome}
@@ -56,12 +56,13 @@ export default function Signup() {
           {/* Campo E-mail */}
           <Text style={styles.label}>E-mail:</Text>
           <Input
-            placeholder="seu@email.com"
+            placeholder="seu-email@email.com"
             placeholderTextColor="#606060"
             keyboardType="email-address"
             style={styles.inputGray}
             value={email}
             onChangeText={setEmail}
+            
           />
 
           {/* Campo Senha */}
@@ -97,10 +98,31 @@ export default function Signup() {
             />
           </View>
 
-          {/* Botão de Ação */}
-          <View style={{ marginTop: 10 }}>
-            <Button label="Próximo" onPress={() => router.push("/info")} />
-          </View>
+         {/* Botão de Ação */}
+      <View style={{ marginTop: 10 }}>
+        <Button 
+          label="Próximo" 
+          onPress={() => {
+            // 1. Verificamos se a senha e a confirmação são iguais
+            if (senha !== confirmarSenha) {
+              alert("As senhas não coincidem!");
+              return; // Para o código aqui e não muda de tela
+          }
+
+            // 2. Enviamos os dados para a tela /info
+            router.push({
+              pathname: "/info",
+              params: { 
+              nome: nome,
+              email: email,
+              senha: senha 
+            }
+            });
+      
+            console.log("Dados enviados do cadastro:", nome);
+          }} 
+        />
+      </View>
 
           {/* Link para voltar ao Login */}
           <Text style={styles.footerText}>
@@ -181,6 +203,7 @@ const styles = StyleSheet.create({
   btnEyePass: {
     position: "absolute",
     right: 15,
+    paddingBottom: 7,
   },
   footerText: {
     fontSize: 14,

@@ -1,3 +1,5 @@
+import { useLocalSearchParams } from "expo-router";
+
 import React, { useState } from "react";
 // Importamos os componentes básicos do celular
 import { Image, Pressable, StyleSheet, Text, View, Alert } from "react-native";
@@ -12,6 +14,8 @@ import { useRouter } from "expo-router";
 export default function Info() {
   const router = useRouter();
   // Criando as "caixinhas" de memória para cada campo
+  const { nome, email, senha } = useLocalSearchParams();
+
   const [dataNascimento, setDataNascimento] = useState("");
   const [altura, setAltura] = useState("");
   const [peso, setPeso] = useState("");
@@ -41,7 +45,7 @@ export default function Info() {
           source={require("@/assets/logo.png")}
           style={styles.illustration}
         />
-        <Text style={styles.headerTitle}>Insira suas informações</Text>
+        <Text style={styles.headerTitle}>Olá {nome}, insira suas informações</Text>
       </View>
 
       {/* --- CORPO (CARD BRANCO) --- */}
@@ -145,6 +149,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 270, // Fixe uma altura para o topo roxo
     justifyContent: "center", // Centraliza o conteúdo dentro desses 250px
+    paddingBottom: 40,
   },
   illustration: {
     width: "90%", // ou "90%"
