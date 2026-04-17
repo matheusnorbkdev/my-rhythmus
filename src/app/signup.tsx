@@ -28,10 +28,10 @@ export default function Signup() {
 
               userService.cadastrar(data)
                 .then((response) => {
-                  alert(response.mensagem);
+                 console.log("Usuário cadastrado com sucesso:", response.data);
                 })
                 .catch((error) => {
-                  alert("Erro ao cadastrar usuário: " + error.message);
+                  console.error("Erro ao cadastrar usuário:", error);
                 });
 };
   return (
