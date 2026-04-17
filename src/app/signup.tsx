@@ -5,7 +5,7 @@ import { Link, useRouter } from "expo-router";
 import React, { useState } from "react"; // Adicionado React para padronização
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import userService from "@/services/UsuarioService" // caminho correto aqui
 export default function Signup() {
   const router = useRouter(); // Agora dentro da função, como deve ser
   const [viewPass, setViewPass] = useState(true);
@@ -19,7 +19,21 @@ export default function Signup() {
   function onViewPass() {
     setViewPass(!viewPass);
   }
+  const salvarUsuario = () => {
+              let data = {
+                nome: nome,
+                email: email,
+                senha: senha,
+              };
 
+              userService.cadastrar(data)
+                .then((response) => {
+                  alert(response.mensagem);
+                })
+                .catch((error) => {
+                  alert("Erro ao cadastrar usuário: " + error.message);
+                });
+};
   return (
     <KeyboardAwareScrollView
       style={styles.mainContainer} // Fundo roxo principal
@@ -120,7 +134,8 @@ export default function Signup() {
               alert("As senhas não coincidem!");
               return;
             }
-
+              salvarUsuario();
+            
             // Se passou por tudo, ele "viaja" para a próxima tela
             router.push({
               pathname: "/info",
