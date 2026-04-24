@@ -1,20 +1,23 @@
 import axios from "axios";
 class UsuarioServices {
   async cadastrar(data) {
-    return axios({
-      url: "192.168.3.35 /api/usuario/cadastrar", 
-      method: "POST",
-      timeout: 5000,
-      data: data,
-      headers: {
-        Accept: "application/json"
-      }
-    }).then((response) => {
-    return Promise.resolve(response);
-    }).catch((error) => {
-    return Promise.reject(error);  
-      });
-}
+    return axios.post("https://jsonplaceholder.typicode.com/users", data)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+    } 
+  async getNome() {
+    return axios.get("https://jsonplaceholder.typicode.com/users/1")
+    .then(response => {
+      return response.data.name;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
 }
 const userService = new UsuarioServices();
 export default userService;

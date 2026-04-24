@@ -5,11 +5,10 @@ import { Link } from "expo-router"
 export default function home(){
     return(
     <ScrollView>
-        <View style={styles.container}>
-        
+        <View style={styles.container}>        
             <Text style = {styles.title}>CONFIG</Text>
-
-        </View>
+                    
+         </View>
     </ScrollView>
     )	
 }
