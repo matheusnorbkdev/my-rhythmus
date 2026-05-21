@@ -127,7 +127,7 @@ export default function Info() {
           {/* Na imagem, o botão é apenas uma seta preta no canto */}
           <Pressable
             style={styles.nextButton}
-            onPress={() => router.push("/tabs/home")}
+            onPress={() => router.push("/esportesTela")} // Navega para a próxima tela
           >
             <Feather name="chevron-right" size={50} color="black" />
           </Pressable>

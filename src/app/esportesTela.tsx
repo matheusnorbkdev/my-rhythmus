@@ -1,79 +1,46 @@
-import {View, StyleSheet, ScrollView, Image, Text} from "react-native"
-import {Button} from "@/Components/button"
-import {Input} from "@/Components/Input"
-import { Link } from "expo-router"
-import userService from "@/services/UsuarioService"
-import React from "react";
+import { useLocalSearchParams } from "expo-router";
+import React, { useState } from "react";
+// Importamos os componentes básicos do celular
+import { Image, Pressable, StyleSheet, Text, View, Alert } from "react-native";
+// O ScrollView inteligente que sobe a tela quando o teclado abre
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-export default function home(){
-	return(
-    <KeyboardAwareScrollView
-      // O estilo principal define o fundo roxo da tela inteira
-      style={styles.mainContainer}
-      // Garante que o conteúdo estique se a tela for pequena
-      contentContainerStyle={{ flexGrow: 1 }}
-      // Desativa o efeito de "mola" no topo para a cor não descolar
-      bounces={false}
-    >
-      {/* --- CABEÇALHO (PARTE ROXA) --- */}
+// Ícones (usaremos a setinha 'chevron')
+import Feather from "@expo/vector-icons/Feather";
+// Importação dos seus componentes customizados
+import { Input } from "@/Components/Input";
+import { useRouter } from "expo-router";
+
+export default function EsportesTela() {
+  const router = useRouter();
+  // Criando as "caixinhas" de memória para cada campo
+  const { nome, email, senha } = useLocalSearchParams();
+  const esportes = useState([
+    "Futebol",
+    "Basquete",
+    "Vôlei",
+    "Tênis",
+    "Natação",
+    "Corrida",
+    "Ciclismo",
+    "Artes Marciais",
+  ]);
+  return (
+    <KeyboardAwareScrollView style={styles.mainContainer}>
       <View style={styles.header}>
-        <Image
-          source={require("@/assets/logo.png")}
-          style={styles.illustration}
-        />
-        <Text style={styles.headerTitle}>Olá {/*userService.getNome()*/}, Qual treino deseja realizar?</Text>
+        <Text style={styles.headerTitle}>Esportes</Text>
       </View>
-
-      {/* --- CORPO (CARD BRANCO) --- */}
-      {/* Este View é o que cria o efeito de "folha de papel" por cima do roxo */}
-	  <View style={styles.contentCard}>
+      <View style={styles.contentCard}>
         <View style={styles.form}>
-          <View style={styles.listinhaDostreinos}>
-            <Link href="/tabs/configuracoes" style={styles.treinos}>
-              <Text style={styles.textinho}>Treino 1</Text>
-
-            </Link>
-          </View>
+          {/* Sports selection will go here */}
         </View>
       </View>
-
     </KeyboardAwareScrollView>
-	)	
+  );
 }
+
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 20,
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	title: {
-		fontSize: 24,
-		fontWeight: "bold",
-		marginBottom: 10,
-	},
-	listinhaDostreinos:{
-		display: "flex",
-		flexDirection: "row",
-		width: "120%",
-		marginTop: 100,
-		padding: 10,
-		borderRadius: 10,
-	},
-	treinos: {
-		backgroundColor: "#2E008B",
-		padding: 5,
-		borderRadius: 10,
-		height: 100,
-		width: 150,
-		alignItems: "center",
-		marginBottom: 20,
-		marginLeft: 20,
-	},
-	textinho:{
-		color: "#fff",
-	},
-	mainContainer: {
+  // 1. O fundo de toda a página
+  mainContainer: {
     flex: 1,
     backgroundColor: "#2E008B",
   },
@@ -144,4 +111,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingBottom: 30,
   },
+  secao : {
+  width: "100%",
+  height: 60,
+  backgroundColor: "#2E008B",
+  fontSize: 18,
+  color: "#FFF",
+  fontWeight: "600",
+  borderRadius: 20,
+  textAlign: "center",
+  }
 });

@@ -3,7 +3,7 @@ import { Button } from "@/Components/button";
 import Feather from "@expo/vector-icons/Feather";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {Image, Pressable, StyleSheet, Text, View } from "react-native";
 // KeyboardAwareScrollView: Faz a tela subir sozinha quando o teclado abre, sem tapar os inputs
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
