@@ -1,37 +1,129 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
-// Importamos os componentes básicos do celular
-import { Image, Pressable, StyleSheet, Text, View, Alert } from "react-native";
-// O ScrollView inteligente que sobe a tela quando o teclado abre
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-// Ícones (usaremos a setinha 'chevron')
 import Feather from "@expo/vector-icons/Feather";
-// Importação dos seus componentes customizados
-import { Input } from "@/Components/Input";
-import { useRouter } from "expo-router";
 
-export default function EsportesTela() {
+// IMPORTANTE: Importando as duas famílias de ícones que você pediu
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+
+export default function Esportes() {
   const router = useRouter();
-  // Criando as "caixinhas" de memória para cada campo
-  const { nome, email, senha } = useLocalSearchParams();
-  const esportes = useState([
-    "Futebol",
-    "Basquete",
-    "Vôlei",
-    "Tênis",
-    "Natação",
-    "Corrida",
-    "Ciclismo",
-    "Artes Marciais",
-  ]);
+  const { nome } = useLocalSearchParams();
+
+  const [esportesSelecionados, setEsportesSelecionados] = useState([]);
+
+  // Nova lista mapeada com os ícones específicos que você enviou
+  const listaEsportes = [
+    { 
+      id: "futebol", 
+      nome: "Futebol", 
+      lib: "FontAwesome", 
+      icone: "soccer-ball-o" 
+    },
+    { 
+      id: "basquete", 
+      nome: "Basquete", 
+      lib: "FontAwesome5", 
+      icone: "basketball-ball" 
+    },
+    { 
+      id: "volei", 
+      nome: "Vôlei", 
+      lib: "FontAwesome5", 
+      icone: "volleyball-ball" 
+    },
+    { 
+      id: "natacao", 
+      nome: "Natação", 
+      lib: "FontAwesome5", 
+      icone: "swimmer" 
+    },
+    { 
+      id: "corrida", 
+      nome: "Corrida", 
+      lib: "FontAwesome5", 
+      icone: "running" 
+    },
+    { 
+      id: "outros", 
+      nome: "Outros", 
+      lib: "FontAwesome5", 
+      icone: "running" // Ícone genérico para outros, mude se preferir
+    },
+  ];
+
+  const alternarEsporte = (id) => {
+    if (esportesSelecionados.includes(id)) {
+      setEsportesSelecionados(esportesSelecionados.filter((item) => item !== id));
+    } else {
+      setEsportesSelecionados([...esportesSelecionados, id]);
+    }
+  };
+
   return (
-    <KeyboardAwareScrollView style={styles.mainContainer}>
+    <KeyboardAwareScrollView
+      style={styles.mainContainer}
+      contentContainerStyle={{ flexGrow: 1 }}
+      bounces={false}
+    >
+      {/* --- CABEÇALHO --- */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Esportes</Text>
+        <Image
+          source={require("@/assets/logo.png")}
+          style={styles.illustration}
+        />
+        <Text style={styles.headerTitle}>Quais esportes você pratica?</Text>
       </View>
+
+      {/* --- CORPO --- */}
       <View style={styles.contentCard}>
         <View style={styles.form}>
-          {/* Sports selection will go here */}
+          <Text style={styles.label}>Selecione uma ou mais opções:</Text>
+
+          <View style={styles.checkboxContainer}>
+            {listaEsportes.map((esporte) => {
+              const estaSelecionado = esportesSelecionados.includes(esporte.id);
+
+              // Cor dinâmica: se selecionado usa o roxo do app, se não, usa cinza escuro
+              const corIconeEsporte = estaSelecionado ? "#2E008B" : "#555555";
+
+              return (
+                <Pressable
+                  key={esporte.id}
+                  style={styles.checkboxOption}
+                  onPress={() => alternarEsporte(esporte.id)}
+                >
+                  {/* 1. Caixa de seleção (Check/Square) */}
+                  <Feather
+                    name={estaSelecionado ? "check-square" : "square"}
+                    size={26}
+                    color={estaSelecionado ? "#2E008B" : "#606060"}
+                  />
+
+                  {/* 2. Ícone decorativo do esporte (Renderização condicional da biblioteca) */}
+                  {esporte.lib === "FontAwesome" ? (
+                    <FontAwesome name={esporte.icone} size={22} color={corIconeEsporte} style={styles.sportIcon} />
+                  ) : (
+                    <FontAwesome5 name={esporte.icone} size={22} color={corIconeEsporte} style={styles.sportIcon} />
+                  )}
+
+                  {/* 3. Texto do esporte */}
+                  <Text style={styles.checkboxText}>{esporte.nome}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+
+          {/* --- BOTÃO DE PRÓXIMO --- */}
+          <Pressable
+            style={styles.nextButton}
+            onPress={() => router.push("/tabs/home")} // Rota genérica, mude para a rota específica se tiver
+
+          >
+            <Feather name="chevron-right" size={50} color="black" />
+          </Pressable>
         </View>
       </View>
     </KeyboardAwareScrollView>
@@ -39,86 +131,72 @@ export default function EsportesTela() {
 }
 
 const styles = StyleSheet.create({
-  // 1. O fundo de toda a página
   mainContainer: {
     flex: 1,
     backgroundColor: "#2E008B",
   },
-  // 2. Área do topo onde fica o logo e a frase branca
   header: {
     alignItems: "center",
-    height: 270, // Fixe uma altura para o topo roxo
-    justifyContent: "center", // Centraliza o conteúdo dentro desses 250px
+    height: 270,
+    justifyContent: "center",
     paddingBottom: 40,
   },
   illustration: {
-    width: "90%", // ou "90%"
+    width: "90%",
     height: 200,
     resizeMode: "contain",
-    // Se quiser que ela suba um pouco sem mexer no resto:
     marginTop: -20,
   },
   headerTitle: {
-    fontSize: 28,
-    color: "#FFF", // Texto branco sobre o roxo
+    fontSize: 26,
+    color: "#FFF",
     fontWeight: "400",
     textAlign: "center",
     marginTop: 20,
+    paddingHorizontal: 10,
   },
-  // 3. O "Pulo do Gato": Este container branco sobe e arredonda só um lado
   contentCard: {
-    flex: 1, // Faz o card ocupar o restante da tela
-    backgroundColor: "#FFF", // Fundo branco
-    borderTopRightRadius: 80, // Cria a curva acentuada no canto direito
+    flex: 1,
+    backgroundColor: "#FFF",
+    borderTopRightRadius: 80,
     paddingHorizontal: 35,
     paddingTop: 40,
   },
   form: {
-    gap: 15, // Espaçamento vertical automático entre os campos
+    gap: 15,
   },
   label: {
     fontSize: 16,
     color: "#000000",
-    marginBottom: -8, // Aproxima o texto do input abaixo dele
+    marginBottom: 5,
     marginLeft: 5,
   },
-  // 4. Estilo dos inputs cinzas da imagem
-  inputGray: {
-    backgroundColor: "#BDBDBD", // Cor cinza de fundo
-    borderRadius: 20, // Bordas bem redondas
-    height: 45,
-    paddingHorizontal: 15,
-    borderWidth: 0, // Remove bordas laterais se houver
+  checkboxContainer: {
+    gap: 12,
+    marginTop: 5,
   },
-  // 5. O seletor de Sexo (é um botão que parece um input)
-  pickerFake: {
+  checkboxOption: {
     backgroundColor: "#BDBDBD",
-    height: 45,
+    height: 50,
     borderRadius: 20,
-    flexDirection: "row", // Alinha texto e ícone lado a lado
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", // Joga o ícone para a ponta direita
     paddingHorizontal: 15,
   },
-  pickerText: {
-    fontSize: 16,
-    color: "#333",
-    paddingLeft: 4,
+  sportIcon: {
+    marginLeft: 10, // Afasta o ícone do esporte da caixinha de check
+    marginRight: 5,  // Afasta o ícone do esporte do texto lateral
+    width: 28,       // Largura fixa para deixar todos os textos alinhados perfeitamente
+    textAlign: "center"
   },
-  // 6. Alinha a seta de navegação no canto inferior direito
+  checkboxText: {
+    fontSize: 16,
+    color: "#000000",
+    fontWeight: "500",
+  },
   nextButton: {
     alignSelf: "flex-end",
-    marginTop: 10,
+    marginTop: 20,
     paddingBottom: 30,
   },
-  secao : {
-  width: "100%",
-  height: 60,
-  backgroundColor: "#2E008B",
-  fontSize: 18,
-  color: "#FFF",
-  fontWeight: "600",
-  borderRadius: 20,
-  textAlign: "center",
-  }
 });
