@@ -29,7 +29,7 @@ export default function home(){
 	  <View style={styles.contentCard}>
         <View style={styles.form}>
           <View style={styles.listinhaDostreinos}>
-            <Link href="/tabs/configuracoes" style={styles.treinos}>
+            <Link href="/treino" style={styles.treinos}>
               <Text style={styles.textinho}>Treino 1</Text>
 
             </Link>
