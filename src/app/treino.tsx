@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import { Ionicons, Feather } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 // Importamos o Svg e o Circle para desenhar a barra de progresso
 import Svg, { Circle } from "react-native-svg";
 // LUGAR CERTO: Importação do roteador corrigida para não dar erro
@@ -17,7 +17,7 @@ export default function WorkoutScreen() {
   // Efeito que roda o cronômetro segundo a segundo se o "Play" estiver ativo
   useEffect(() => {
     // CORREÇÃO DO SUBINHADO VERMELHO: Inicializado como null e tipado corretamente
-    let intervalo: NodeJS.Timeout | null = null;
+    let intervalo: ReturnType<typeof setInterval> | null = null;
 
     if (isPlaying && segundosRestantes > 0) {
       intervalo = setInterval(() => {

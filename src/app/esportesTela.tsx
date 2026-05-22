@@ -12,7 +12,7 @@ export default function Esportes() {
   const router = useRouter();
   const { nome } = useLocalSearchParams();
 
-  const [esportesSelecionados, setEsportesSelecionados] = useState([]);
+  const [esportesSelecionados, setEsportesSelecionados] = useState<string[]>([]);
 
   // Nova lista mapeada com os ícones específicos que você enviou
   const listaEsportes = [
@@ -54,7 +54,7 @@ export default function Esportes() {
     },
   ];
 
-  const alternarEsporte = (id) => {
+  const alternarEsporte = (id: string) => {
     if (esportesSelecionados.includes(id)) {
       setEsportesSelecionados(esportesSelecionados.filter((item) => item !== id));
     } else {
@@ -104,9 +104,19 @@ export default function Esportes() {
 
                   {/* 2. Ícone decorativo do esporte (Renderização condicional da biblioteca) */}
                   {esporte.lib === "FontAwesome" ? (
-                    <FontAwesome name={esporte.icone} size={22} color={corIconeEsporte} style={styles.sportIcon} />
+                    <FontAwesome
+                      name={esporte.icone as React.ComponentProps<typeof FontAwesome>["name"]}
+                      size={22}
+                      color={corIconeEsporte}
+                      style={styles.sportIcon}
+                    />
                   ) : (
-                    <FontAwesome5 name={esporte.icone} size={22} color={corIconeEsporte} style={styles.sportIcon} />
+                    <FontAwesome5
+                      name={esporte.icone as React.ComponentProps<typeof FontAwesome5>["name"]}
+                      size={22}
+                      color={corIconeEsporte}
+                      style={styles.sportIcon}
+                    />
                   )}
 
                   {/* 3. Texto do esporte */}

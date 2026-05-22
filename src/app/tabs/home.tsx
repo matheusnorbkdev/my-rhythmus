@@ -9,29 +9,38 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 export default function Home() {
   const router = useRouter();
 
+  type Treino = {
+    id: string;
+    nome: string;
+    sub: string;
+    icone: React.ComponentProps<typeof MaterialCommunityIcons>["name"] | React.ComponentProps<typeof FontAwesome5>["name"];
+    rota: string;
+    tipoLib?: "material" | "fa5";
+  };
+
   // 1. Seus Treinos (Personalizados / Salvos)
-  const seusTreinos = [
+  const seusTreinos: Treino[] = [
     { id: "1", nome: "Flexibilidade", sub: "Membros Inferiores", icone: "accessibility", rota: "/treino.tsx" },
     { id: "2", nome: "Abertura Zero", sub: "Treino Avançado", icone: "running", rota: "/treino.tsx" },
     { id: "3", nome: "Coluna Alinhada", sub: "Postural Intensivo", icone: "human-male", tipoLib: "material", rota: "/treino.tsx" },
   ];
 
   // 2. Treinos do Dia a Dia (Rotinas diárias)
-  const treinosDiaDia = [
+  const treinosDiaDia: Treino[] = [
     { id: "4", nome: "Alongar ao Acordar", sub: "5 min - Despertar", icone: "weather-sunny", tipoLib: "material", rota: "/treino.tsx" },
     { id: "5", nome: "Pausa no Trabalho", sub: "8 min - Cadeira", icone: "chair-rolling", tipoLib: "material", rota: "/treino.tsx" },
-    { id: "6", nome: "Relaxante Noturno", sub: "10 min - Dormir bem", icone: "bed", tipoLib: "fa5", rota: "/treino.tsx" },
+    { id: "6", nome: "Relaxante Noturno", sub: "10 min - Dormir bem", icone: "bed", tipoLib: "fa5", rota: "@" },
   ];
 
   // 3. Minha sugestão: Foco por Região (Alívio de dores específicas)
-  const focoRegiao = [
+  const focoRegiao: Treino[] = [
     { id: "7", nome: "Alívio Lombar", sub: "Foco nas Costas", icone: "bone", tipoLib: "fa5", rota: "/treino.tsx" },
     { id: "8", nome: "Pescoço e Ombros", sub: "Antiestresse", icone: "head-neck", tipoLib: "material", rota: "/treino.tsx" },
     { id: "9", nome: "Mãos e Punhos", sub: "Prevenção LER", icone: "hand-paper", tipoLib: "fa5", rota: "/treino.tsx" },
   ];
 
   // Função auxiliar para desenhar o ícone correto baseado na biblioteca escolhida
-  const renderIcon = (treino) => {
+  const renderIcon = (treino: Treino) => {
     if (treino.tipoLib === "material") {
       return <MaterialCommunityIcons name={treino.icone} size={28} color="#FFF" style={styles.icon} />;
     }
@@ -39,7 +48,7 @@ export default function Home() {
   };
 
   // Componente interno para renderizar cada carrossel de forma limpa
-  const renderCarrossel = (listaDados) => (
+  const renderCarrossel = (listaDados: Treino[]) => (
     <ScrollView 
       horizontal 
       showsHorizontalScrollIndicator={false}
@@ -49,7 +58,7 @@ export default function Home() {
         <Pressable
           key={treino.id}
           style={styles.cardTreino}
-          onPress={() => router.push(treino.rota || "/tabs/configuracoes")}
+          onPress={() => router.push("/treino")} // Rota genérica para teste, ajuste conforme necessário
         >
           {renderIcon(treino)}
           <Text style={styles.tituloTreino} numberOfLines={1}>{treino.nome}</Text>
