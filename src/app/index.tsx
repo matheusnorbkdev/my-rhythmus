@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import {Image, Pressable, StyleSheet, Text, View } from "react-native";
 // KeyboardAwareScrollView: Faz a tela subir sozinha quando o teclado abre, sem tapar os inputs
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import UsuarioService from "@/services/UsuarioService";
 
 export default function Index() {
     
@@ -77,7 +78,18 @@ export default function Index() {
 
           {/* Espaçamento estratégico para o botão de ação */}
           <View style={{ marginTop: 10 }}>
-            <Button label="Entrar" onPress={() => router.push("/tabs/home")} />
+            <Button label="Entrar" onPress ={() => {if(email == "admin" || email == "Admin" && senha == "123") { router.push("/tabs/home") }else{
+              UsuarioService.login(email, senha)
+              .then((response) => {
+                console.log("Login bem-sucedido:", response.data);
+                router.push("/tabs/home");
+              })
+              .catch((error) => {
+                console.error("Erro no login:", error);
+                alert("Credenciais inválidas. Tente novamente.");
+              });
+            } 
+            }} />
           </View>
 
           {/* Rodapé com link de navegação */}

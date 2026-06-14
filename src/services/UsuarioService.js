@@ -1,7 +1,16 @@
-import axios from "axios";
+import api from "@/services/api";
 class UsuarioServices {
+  async login(email, senha){
+    try{
+      const response = await api.post("/login", {email, senha});
+      return response.data;  
+    }catch(error){
+      console.log("erro no login" , error.response.data)
+    }
+
+  }
   async cadastrar(data) {
-    return axios.post("https://naotem", data)
+    return api.post("/cadastrar", data)
     .then(response => {
       return response.data;
     })
@@ -43,6 +52,7 @@ class UsuarioServices {
     // Simulando a obtenção do sexo
     return "Masculino";
   }
+  
 }
 const userService = new UsuarioServices();
 export default userService;
