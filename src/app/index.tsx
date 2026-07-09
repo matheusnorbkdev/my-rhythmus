@@ -78,7 +78,7 @@ export default function Index() {
 
           {/* Espaçamento estratégico para o botão de ação */}
           <View style={{ marginTop: 10 }}>
-            <Button label="Entrar" onPress ={() => {if(email == "admin" || email == "Admin" && senha == "123") { router.push("/tabs/home") }else{
+            <Button label="Entrar" onPress ={() => if((email === "Admin" || email === "admin") && senha === "123" ) { router.push("/tabs/home") }else{
               UsuarioService.login(email, senha)
               .then((response) => {
                 console.log("Login bem-sucedido:", response.data);

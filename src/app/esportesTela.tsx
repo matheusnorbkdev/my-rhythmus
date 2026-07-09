@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Feather from "@expo/vector-icons/Feather";
+import UsuarioService from "@/services/UsuarioService";
 
 // IMPORTANTE: Importando as duas famílias de ícones que você pediu
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-
 export default function Esportes() {
   const router = useRouter();
-  const { nome } = useLocalSearchParams();
+  const {nome, email, senha, dataNascimento, sexo, altura, peso } = useLocalSearchParams();
 
   const [esportesSelecionados, setEsportesSelecionados] = useState<string[]>([]);
 
@@ -61,7 +61,17 @@ export default function Esportes() {
       setEsportesSelecionados([...esportesSelecionados, id]);
     }
   };
+  const salvaUsuario = function() {
+    UsuarioService.cadastrar({ nome, email, senha, dataNascimento, sexo, altura, peso, esportes: esportesSelecionados })
+      .then((resposta) => {
+        console.log("Usuário cadastrado com sucesso:", resposta);
+        router.push("/tabs/home");
+      })
+      .catch((erro) => {
+        console.error("Erro ao cadastrar usuário:", erro);
+      });
 
+  }
   return (
     <KeyboardAwareScrollView
       style={styles.mainContainer}
@@ -129,8 +139,19 @@ export default function Esportes() {
           {/* --- BOTÃO DE PRÓXIMO --- */}
           <Pressable
             style={styles.nextButton}
-            onPress={() => router.push("/tabs/home")} // Rota genérica, mude para a rota específica se tiver
-
+            onPress={() => router.push({
+              pathname: "/tabs/home",
+              params: {
+                nome,
+                email,
+                senha,
+                dataNascimento,
+                sexo,
+                altura,
+                peso,
+                esportes: esportesSelecionados.join(",") // Passando como string separada por vírgulas
+              },
+            })}
           >
             <Feather name="chevron-right" size={50} color="black" />
           </Pressable>
@@ -139,6 +160,7 @@ export default function Esportes() {
     </KeyboardAwareScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   mainContainer: {

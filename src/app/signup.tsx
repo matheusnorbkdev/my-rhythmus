@@ -19,21 +19,6 @@ export default function Signup() {
   function onViewPass() {
     setViewPass(!viewPass);
   }
-  const salvarUsuario = () => {
-              let data = {
-                nome: nome,
-                email: email,
-                senha: senha,
-              };
-
-              userService.cadastrar(data)
-                .then((response) => {
-                 console.log("Usuário cadastrado com sucesso:", response.data);
-                })
-                .catch((error) => {
-                  console.error("Erro ao cadastrar usuário:", error);
-                });
-};
   return (
     <KeyboardAwareScrollView
       style={styles.mainContainer} // Fundo roxo principal
@@ -134,7 +119,6 @@ export default function Signup() {
               alert("As senhas não coincidem!");
               return;
             }
-              salvarUsuario();
             
             // Se passou por tudo, ele "viaja" para a próxima tela
             router.push({

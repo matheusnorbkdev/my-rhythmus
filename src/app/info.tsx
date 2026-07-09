@@ -20,7 +20,7 @@ export default function Info() {
   const [altura, setAltura] = useState("");
   const [peso, setPeso] = useState("");
   const [sexo, setSexo] = useState("Sexo");
-
+  
   // Função para abrir o menu de seleção de sexo
   const selecionarSexo = () => {
     Alert.alert("Selecione o Sexo", "Escolha uma opção:", [
@@ -30,7 +30,8 @@ export default function Info() {
     ]);
   };
 
-  return (
+
+return (
     <KeyboardAwareScrollView
       // O estilo principal define o fundo roxo da tela inteira
       style={styles.mainContainer}
@@ -127,7 +128,20 @@ export default function Info() {
           {/* Na imagem, o botão é apenas uma seta preta no canto */}
           <Pressable
             style={styles.nextButton}
-            onPress={() => router.push("/esportesTela")} // Navega para a próxima tela
+            onPress={() => 
+            router.push({
+              pathname: "/esportesTela",
+              params: {
+                nome,
+                email,
+                senha,
+                dataNascimento,
+                sexo,
+                altura,
+                peso,
+              },
+            })
+          }
           >
             <Feather name="chevron-right" size={50} color="black" />
           </Pressable>
