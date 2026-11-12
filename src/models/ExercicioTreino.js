@@ -4,6 +4,7 @@ export default class ExercicioTreino {
         exercicioId,
         tipo,
         ordem,
+        series,
         repeticoes,
         duracao,
         descanso
@@ -12,6 +13,7 @@ export default class ExercicioTreino {
         this.exercicioId = exercicioId;
         this.tipo = tipo;
         this.ordem = ordem;
+        this.series = series;
         this.repeticoes = repeticoes;
         this.duracao = duracao;
         this.descanso = descanso;

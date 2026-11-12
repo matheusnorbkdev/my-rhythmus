@@ -9,7 +9,8 @@ export const mobilidades = [
         "quadril",
         "futebol basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new mobilidade(
         "2",
@@ -17,7 +18,8 @@ export const mobilidades = [
         "quadril",
         "futebol",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new mobilidade(
         "3",
@@ -25,7 +27,8 @@ export const mobilidades = [
         "quadril",
         "futebol geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new mobilidade(
         "4",
@@ -33,7 +36,8 @@ export const mobilidades = [
         "quadril",
         "futebol basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new mobilidade(
         "5",
@@ -41,7 +45,8 @@ export const mobilidades = [
         "quadril",
         "futebol basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
 
     // TORNOZELOS
@@ -51,7 +56,7 @@ export const mobilidades = [
         "tornozelos",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
     new mobilidade(
         "7",
@@ -59,7 +64,8 @@ export const mobilidades = [
         "tornozelos",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/giro_calcanhar.jpeg")
     ),
     new mobilidade(
         "8",
@@ -67,7 +73,7 @@ export const mobilidades = [
         "tornozelos",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
 
     // OMBROS
@@ -77,7 +83,7 @@ export const mobilidades = [
         "ombros",
         "volei basquete",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
     new mobilidade(
         "10",
@@ -85,7 +91,7 @@ export const mobilidades = [
         "ombros",
         "volei basquete",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
     new mobilidade(
         "11",
@@ -93,7 +99,8 @@ export const mobilidades = [
         "ombros",
         "volei basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/mobilidade_ombro.png")
     ),
     new mobilidade(
         "12",
@@ -101,7 +108,8 @@ export const mobilidades = [
         "ombros",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/escapular_quatro_apoios.png")
     ),
 
     // COLUNA TORACICA
@@ -111,7 +119,7 @@ export const mobilidades = [
         "coluna toracica",
         "geral",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
     new mobilidade(
         "14",
@@ -119,7 +127,8 @@ export const mobilidades = [
         "coluna toracica",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new mobilidade(
         "15",
@@ -127,7 +136,8 @@ export const mobilidades = [
         "coluna toracica",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/rotacao_toraxica_deitado.png")
     ),
 
     // PUNHOS
@@ -137,7 +147,7 @@ export const mobilidades = [
         "punhos",
         "volei basquete",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
     new mobilidade(
         "17",
@@ -145,7 +155,7 @@ export const mobilidades = [
         "punhos",
         "geral",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
 
     // JOELHOS
@@ -155,7 +165,7 @@ export const mobilidades = [
         "joelhos",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        ""
     ),
     new mobilidade(
         "19",
@@ -163,7 +173,8 @@ export const mobilidades = [
         "joelhos",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/mobilidade_joelhos_em_pe.jpeg")
     ),
     new mobilidade(
         "20",
@@ -171,6 +182,6 @@ export const mobilidades = [
         "joelhos",
         "futebol basquete",
         "",
-        "<URL_da_imagem>"
+        ""
     )
 ]

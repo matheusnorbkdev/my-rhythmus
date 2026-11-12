@@ -58,7 +58,7 @@ export default function Home() {
         <Pressable
           key={treino.id}
           style={styles.cardTreino}
-          onPress={() => router.push("/treino")} // Rota genérica para teste, ajuste conforme necessário
+          onPress={() => router.push({ pathname: "/treino", params: { treinoId: treino.id } })}
         >
           {renderIcon(treino)}
           <Text style={styles.tituloTreino} numberOfLines={1}>{treino.nome}</Text>

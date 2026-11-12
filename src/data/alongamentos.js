@@ -8,7 +8,8 @@ export const alongamentos = [
         "pernas",
         "futebol",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_quadriceps_empe.jpeg")
     ),
     new Alongamento(
         "2",
@@ -16,7 +17,8 @@ export const alongamentos = [
         "pescoço",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_de_pescoco.jpeg")
     ),
     new Alongamento(
         "3",
@@ -24,7 +26,8 @@ export const alongamentos = [
         "braços",
         "volei basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_braco_cruzado.jpeg")
     ),
     new Alongamento(
         "4",
@@ -32,7 +35,8 @@ export const alongamentos = [
         "pernas",
         "futebol",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_braco_lateral.jpeg")
     ),
     new Alongamento(
         "5",
@@ -40,7 +44,8 @@ export const alongamentos = [
         "braços",
         "basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new Alongamento(
         "6",
@@ -48,7 +53,8 @@ export const alongamentos = [
         "pernas",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_quadriceps_deitado.jpeg")
     ),
     new Alongamento(
         "7",
@@ -56,7 +62,8 @@ export const alongamentos = [
         "pernas",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento posterior.png")
     ),
     new Alongamento(
         "8",
@@ -64,7 +71,8 @@ export const alongamentos = [
         "pernas",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamentoposterior.jpeg")
     ),
     new Alongamento(
         "9",
@@ -72,7 +80,8 @@ export const alongamentos = [
         "pernas",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new Alongamento(
         "10",
@@ -80,7 +89,8 @@ export const alongamentos = [
         "quadril",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamentoBorboleta.jpeg")
     ),
     new Alongamento(
         "11",
@@ -88,7 +98,8 @@ export const alongamentos = [
         "quadril",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/Alongamento_gluteo_deitado.png")
     ),
     new Alongamento(
         "12",
@@ -96,7 +107,8 @@ export const alongamentos = [
         "pernas",
         "futebol",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_adutores.png")
     ),
     new Alongamento(
         "13",
@@ -104,7 +116,8 @@ export const alongamentos = [
         "peito",
         "volei basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_peitoral.png")
     ),
     new Alongamento(
         "14",
@@ -112,7 +125,8 @@ export const alongamentos = [
         "braços",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_biceps.jpg")
     ),
     new Alongamento(
         "15",
@@ -120,7 +134,8 @@ export const alongamentos = [
         "braços",
         "volei basquete",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/alongamento_antebraco.png")
     ),
     new Alongamento(
         "16",
@@ -128,7 +143,8 @@ export const alongamentos = [
         "costas",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        ""
     ),
     new Alongamento(
         "17",
@@ -136,7 +152,8 @@ export const alongamentos = [
         "costas",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/Postura da Criança.png")
     ),
     new Alongamento(
         "18",
@@ -144,7 +161,8 @@ export const alongamentos = [
         "costas",
         "futebol corrida",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/Alongamento Lombar Deitado.png")
     ),
     new Alongamento(
         "19",
@@ -152,7 +170,8 @@ export const alongamentos = [
         "costas",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/Alongamento com torção sentada.png")
     ),
     new Alongamento(
         "20",
@@ -160,6 +179,7 @@ export const alongamentos = [
         "pescoço",
         "geral",
         "",
-        "<URL_da_imagem>"
+        "",
+        require("@/assets/Alongamento Trapézio.png")
     )
 ]
